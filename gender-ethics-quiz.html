@@ -1,0 +1,2398 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Gender Ethics — Interactive Case Study Quiz</title>
+    <meta
+      name="description"
+      content="An interactive storybook quiz exploring Gender Ethics through 10 real-world campus and workplace case studies, instant ethical feedback, and personal reflection takeaways."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>:root {
+  --bg-paper: #f7f3eb;
+  --surface-card: #fffdf9;
+  --border-hairline: #ded7c9;
+  --border-soft: #eae3d7;
+  --ink-primary: #1c1917;
+  --ink-secondary: #57534e;
+  --ink-muted: #78716c;
+  --accent-cobalt: #1d4ed8;
+  --accent-terracotta: #c2410c;
+  --accent-ochre: #b45309;
+  --accent-teal: #0f766e;
+  --accent-emerald: #15803d;
+  --font-display: "Fraunces", Georgia, ui-serif, serif;
+  --font-body: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-paper);
+  color: var(--ink-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-paper);
+  color: var(--ink-primary);
+}
+
+
+/* Header */
+.site-header {
+  background: var(--bg-paper);
+  border-bottom: 1px solid var(--border-hairline);
+  flex-shrink: 0;
+}
+
+.header-inner {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 0.85rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.brand-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink-primary);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.brand-btn:hover {
+  color: var(--accent-cobalt);
+}
+
+.header-status {
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+
+.header-status .mono {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--ink-primary);
+}
+
+.header-status .aspect {
+  font-weight: 600;
+  color: var(--accent-cobalt);
+}
+
+@media (max-width: 639px) {
+  .header-status {
+    display: none;
+  }
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-shrink: 0;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.35rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 0.75rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+
+.btn-sm {
+  padding: 0.42rem 0.95rem;
+  font-size: 0.8rem;
+  border-radius: 0.55rem;
+}
+
+.btn-primary {
+  background-color: var(--ink-primary);
+  color: var(--surface-card);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-cobalt);
+}
+
+.btn-secondary {
+  background-color: var(--surface-card);
+  color: var(--ink-primary);
+  border-color: var(--border-hairline);
+}
+
+.btn-secondary:hover {
+  border-color: #a8a29e;
+}
+
+/* Typography helpers */
+.kicker {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.kicker-terracotta {
+  color: var(--accent-terracotta);
+}
+
+.kicker-teal {
+  color: var(--accent-teal);
+}
+
+.display-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--ink-primary);
+  margin: 0.4rem 0 0;
+  text-wrap: balance;
+}
+
+.body-lead {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--ink-secondary);
+  margin: 0.7rem 0 0;
+  max-width: 54ch;
+}
+
+/* Welcome View */
+.welcome-main {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hero-banner {
+  width: 100%;
+  height: 9rem;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-hairline);
+  background-color: var(--bg-paper);
+  flex-shrink: 0;
+}
+
+@media (min-width: 640px) {
+  .hero-banner {
+    height: 11rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-banner {
+    height: 13rem;
+  }
+}
+
+.hero-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.08);
+  display: block;
+}
+
+.welcome-content {
+  flex: 1;
+  min-height: 0;
+  max-width: 64rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.welcome-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .welcome-grid {
+    grid-template-columns: 7fr 5fr;
+    gap: 3rem;
+  }
+}
+
+.welcome-title {
+  font-size: clamp(1.65rem, 2.8vw, 2.35rem);
+  line-height: 1.15;
+}
+
+.welcome-cta-row {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.welcome-pillars {
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-hairline);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+@media (min-width: 1024px) {
+  .welcome-pillars {
+    padding-top: 0;
+    padding-left: 2rem;
+    border-top: none;
+    border-left: 1px solid var(--border-hairline);
+  }
+}
+
+.pillar-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+.pillar-marker {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 2px;
+  margin-top: 0.35rem;
+  flex-shrink: 0;
+}
+
+.marker-foundations {
+  background-color: var(--accent-cobalt);
+}
+.marker-sexual {
+  background-color: var(--accent-terracotta);
+}
+.marker-digital {
+  background-color: var(--accent-ochre);
+}
+.marker-spaces {
+  background-color: var(--accent-teal);
+}
+
+.pillar-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.pillar-sub {
+  margin: 0.15rem 0 0;
+  font-size: 0.75rem;
+  color: var(--ink-secondary);
+  line-height: 1.4;
+}
+
+/* Quiz View */
+.quiz-main {
+  flex: 1;
+  min-height: 0;
+  max-width: 64rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.85rem;
+}
+
+.progress-track {
+  width: 100%;
+  height: 0.5rem;
+  background-color: #e5dfd3;
+  border-radius: 999px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.progress-fill {
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  transform-origin: left center;
+  transform: scaleX(0.05);
+  background-color: var(--accent-cobalt);
+  transition: transform 450ms cubic-bezier(0.16, 1, 0.3, 1), background-color 300ms ease;
+}
+
+.case-sheet {
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-hairline);
+  border-radius: 1rem;
+  padding: 1.15rem 1.35rem;
+  flex-shrink: 0;
+}
+
+.case-top-row {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.case-thumb-wrap {
+  width: 8.5rem;
+  flex-shrink: 0;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid var(--border-hairline);
+  background: var(--bg-paper);
+  aspect-ratio: 4 / 3;
+}
+
+@media (max-width: 639px) {
+  .case-thumb-wrap {
+    display: none;
+  }
+}
+
+.case-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.case-text-col {
+  flex: 1;
+  min-width: 0;
+}
+
+.case-meta {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+}
+
+.case-meta .aspect-tag {
+  font-weight: 600;
+}
+
+.case-title {
+  margin: 0.25rem 0 0;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+.case-scenario {
+  margin: 0.45rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: #44403c;
+}
+
+.case-question-row {
+  margin-top: 0.75rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--border-soft);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.case-question {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.keys-hint {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: #a8a29e;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .options-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.option-card {
+  text-align: left;
+  padding: 0.85rem 0.95rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-hairline);
+  background-color: var(--surface-card);
+  color: var(--ink-primary);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  cursor: pointer;
+  transition: transform 140ms ease, border-color 140ms ease, background-color 140ms ease, opacity 140ms ease;
+}
+
+.option-card:hover:not(:disabled) {
+  border-color: var(--ink-primary);
+  transform: translateY(-2px);
+}
+
+.option-card:disabled {
+  cursor: default;
+}
+
+.option-card.is-best {
+  background-color: #ecfdf5;
+  border-color: #059669;
+}
+
+.option-card.is-reconsider {
+  background-color: #fffbeb;
+  border-color: #d97706;
+}
+
+.option-card.is-dimmed {
+  opacity: 0.55;
+}
+
+.option-badge {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 0.45rem;
+  border: 1px solid;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.badge-A {
+  color: var(--accent-cobalt);
+  background: #eff6ff;
+  border-color: #bfdbfe;
+}
+.badge-B {
+  color: var(--accent-terracotta);
+  background: #fff7ed;
+  border-color: #fed7aa;
+}
+.badge-C {
+  color: var(--accent-ochre);
+  background: #fffbeb;
+  border-color: #fde68a;
+}
+.badge-D {
+  color: var(--accent-teal);
+  background: #f0fdfa;
+  border-color: #99f6e4;
+}
+
+.option-card.is-best .option-badge {
+  background: #047857;
+  border-color: #047857;
+  color: #ffffff;
+}
+
+.option-card.is-reconsider .option-badge {
+  background: #d97706;
+  border-color: #d97706;
+  color: #ffffff;
+}
+
+.option-status {
+  margin: 0 0 0.2rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.option-status.best {
+  color: #065f46;
+}
+
+.option-status.reconsider {
+  color: #92400e;
+}
+
+.option-label {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.feedback-slot {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: flex-end;
+}
+
+.idle-hint {
+  width: 100%;
+  padding: 0.4rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+}
+
+.mono-counter {
+  font-family: var(--font-mono);
+}
+
+.feedback-strip {
+  width: 100%;
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-hairline);
+  border-radius: 1rem;
+  padding: 1rem 1.15rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .feedback-strip {
+    grid-template-columns: 5fr 5fr 2fr;
+  }
+}
+
+.feedback-heading {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.feedback-heading.best {
+  color: #065f46;
+}
+
+.feedback-heading.reconsider {
+  color: #92400e;
+}
+
+.feedback-note {
+  margin: 0.2rem 0 0;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: #44403c;
+}
+
+.feedback-col-principle {
+  border-top: 1px solid var(--border-soft);
+  padding-top: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .feedback-col-principle {
+    border-top: none;
+    padding-top: 0;
+    border-left: 1px solid var(--border-soft);
+    padding-left: 1rem;
+  }
+}
+
+.feedback-principle {
+  margin: 0;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--accent-cobalt);
+}
+
+.feedback-takeaway {
+  margin: 0.25rem 0 0;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: #44403c;
+}
+
+.feedback-col-action {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Summary View */
+.summary-main {
+  max-width: 56rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.summary-header-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.summary-hero-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .summary-hero-row {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.summary-title {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  line-height: 1.16;
+}
+
+.summary-score-block {
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .summary-score-block {
+    text-align: right;
+  }
+}
+
+.score-label {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+}
+
+.score-value {
+  margin: 0.15rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.score-value span {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--ink-muted);
+}
+
+.summary-pillars-grid {
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-hairline);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .summary-pillars-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.summary-pillar-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.summary-pillar-name {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.summary-pillar-count {
+  margin: 0.25rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.summary-pillar-sub {
+  margin: 0.2rem 0 0;
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+  line-height: 1.35;
+}
+
+.reflection-sheet {
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-hairline);
+  border-radius: 1rem;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.reflection-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.section-title {
+  margin: 0.2rem 0 0;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.reflection-actions {
+  display: flex;
+  gap: 0.65rem;
+}
+
+.field-label {
+  margin: 0 0 0.6rem;
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.pledge-list {
+  border: 1px solid var(--border-hairline);
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.pledge-btn {
+  width: 100%;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-bottom: 1px solid var(--border-soft);
+  background: var(--surface-card);
+  color: var(--ink-secondary);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.pledge-btn:last-child {
+  border-bottom: none;
+}
+
+.pledge-btn.is-active {
+  background: var(--bg-paper);
+  color: var(--ink-primary);
+  font-weight: 500;
+}
+
+.pledge-check {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 0.2rem;
+  border: 1px solid #d6d3d1;
+  background: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+.pledge-btn.is-active .pledge-check {
+  background: var(--ink-primary);
+  border-color: var(--ink-primary);
+  color: #ffffff;
+}
+
+.note-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.saved-hint {
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+}
+
+#reflection-textarea {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-hairline);
+  background: rgba(247, 243, 235, 0.6);
+  padding: 0.85rem;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--ink-primary);
+  resize: vertical;
+}
+
+#reflection-textarea:focus {
+  outline: 2px solid var(--accent-cobalt);
+  background: var(--surface-card);
+}
+
+.takeaways-block {
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-soft);
+}
+
+.takeaways-heading {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.takeaways-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.65rem 2rem;
+}
+
+@media (min-width: 768px) {
+  .takeaways-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.takeaway-item {
+  display: flex;
+  gap: 0.55rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: #44403c;
+}
+
+.takeaway-num {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--accent-cobalt);
+  flex-shrink: 0;
+}
+
+.review-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.review-sub {
+  margin: 0.2rem 0 0;
+  font-size: 0.875rem;
+  color: var(--ink-secondary);
+}
+
+.case-review-list {
+  border-top: 1px solid var(--border-hairline);
+  border-bottom: 1px solid var(--border-hairline);
+}
+
+.review-item {
+  border-bottom: 1px solid var(--border-hairline);
+}
+
+.review-item:last-child {
+  border-bottom: none;
+}
+
+.review-toggle {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0.85rem 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.review-toggle:hover {
+  background: rgba(239, 233, 221, 0.5);
+}
+
+.review-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink-primary);
+}
+
+.review-meta {
+  margin: 0.15rem 0 0;
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+}
+
+.review-body {
+  padding: 0 0.5rem 1rem 2rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: #44403c;
+}
+
+.summary-footer-actions {
+  padding-top: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* Confetti */
+.confetti-layer {
+  pointer-events: none;
+  position: fixed;
+  top: 3rem;
+  left: 0;
+  right: 0;
+  height: 16rem;
+  overflow: hidden;
+  z-index: 40;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: 0;
+  animation: confetti-fall 1.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes confetti-fall {
+  from {
+    transform: translate3d(0, -12px, 0) rotate(0deg);
+    opacity: 0.95;
+  }
+  to {
+    transform: translate3d(var(--tx, 12px), var(--ty, 180px), 0) rotate(var(--rot, 150deg));
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .confetti-layer {
+    display: none !important;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  .site-header,
+  .no-print {
+    display: none !important;
+  }
+  body,
+  .app-shell {
+    background: #ffffff !important;
+  }
+  .print-card {
+    border-color: #d1d5db !important;
+    break-inside: avoid;
+  }
+}
+
+:root{--body-text:#44403c;--track:#e5dfd3;--best-bg:#ecfdf5;--best-border:#059669;--best-text:#065f46;--warn-bg:#fffbeb;--warn-border:#d97706;--warn-text:#92400e;--hero-bg:#efe8da;--hero-ground:#e4dccb;--badge-bg:#fff;--check-bg:#fff;color-scheme:light}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg-paper:#15120e;--surface-card:#201c17;--border-hairline:#3b352c;--border-soft:#2d2820;--ink-primary:#f4efe4;--ink-secondary:#cbc4b6;--ink-muted:#a59d8d;--accent-cobalt:#8ab0ff;--accent-terracotta:#fb9a5c;--accent-ochre:#f6b95a;--accent-teal:#34d3c0;--body-text:#d6d0c3;--track:#383229;--best-bg:#0e2a20;--best-border:#34d399;--best-text:#6ee7b7;--warn-bg:#2e2410;--warn-border:#f59e0b;--warn-text:#fcd34d;--hero-bg:#1d1913;--hero-ground:#27221a;--badge-bg:#2a251d;--check-bg:#2a251d;color-scheme:dark;}}
+:root[data-theme="dark"]{--bg-paper:#15120e;--surface-card:#201c17;--border-hairline:#3b352c;--border-soft:#2d2820;--ink-primary:#f4efe4;--ink-secondary:#cbc4b6;--ink-muted:#a59d8d;--accent-cobalt:#8ab0ff;--accent-terracotta:#fb9a5c;--accent-ochre:#f6b95a;--accent-teal:#34d3c0;--body-text:#d6d0c3;--track:#383229;--best-bg:#0e2a20;--best-border:#34d399;--best-text:#6ee7b7;--warn-bg:#2e2410;--warn-border:#f59e0b;--warn-text:#fcd34d;--hero-bg:#1d1913;--hero-ground:#27221a;--badge-bg:#2a251d;--check-bg:#2a251d;color-scheme:dark;}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg-paper);z-index:60}
+.app-shell{min-height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px))}
+.site-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50}
+.progress-track{background-color:var(--track)}
+.case-scenario,.feedback-note,.feedback-takeaway,.takeaway-item,.review-body{color:var(--body-text)}
+.case-scenario{font-size:.95rem}.option-label{font-size:.92rem}.feedback-note,.feedback-takeaway{font-size:.85rem}.feedback-heading,.feedback-principle{font-size:.8rem}
+.option-card.is-best{background-color:var(--best-bg);border-color:var(--best-border)}
+.option-card.is-reconsider{background-color:var(--warn-bg);border-color:var(--warn-border)}
+.option-status.best,.feedback-heading.best{color:var(--best-text)}
+.option-status.reconsider,.feedback-heading.reconsider{color:var(--warn-text)}
+.option-badge{background:var(--badge-bg)}
+.pledge-check{background:var(--check-bg);border-color:var(--border-hairline)}
+.pledge-btn.is-active .pledge-check{background:var(--ink-primary);color:var(--surface-card)}
+#reflection-textarea{background:var(--bg-paper)}
+.keys-hint{color:var(--ink-muted)}
+.btn:focus-visible,.option-card:focus-visible,.pledge-btn:focus-visible,.review-toggle:focus-visible,.brand-btn:focus-visible{outline:3px solid var(--accent-cobalt);outline-offset:2px}
+.hero-banner-img{transform:none}
+.case-thumb{background:var(--bg-paper)}
+.review-best{color:var(--best-text)}
+.score-note{margin:.3rem 0 0;font-size:.85rem;color:var(--ink-secondary);max-width:26ch}
+@media (min-width:768px){.score-note{margin-left:auto}}
+@media print{:root{padding:0}body::before{display:none}.site-header{position:static}}
+</style>
+  </head>
+  <body>
+    <div id="app" class="app-shell is-locked">
+      <header class="site-header">
+        <div class="header-inner">
+          <button type="button" id="brand-home-btn" class="brand-btn">
+            Gender Ethics
+          </button>
+
+          <div id="header-status" class="header-status">
+            Ethics &amp; Values · 10 Case Studies
+          </div>
+
+          <div class="header-actions">
+            <button
+              type="button"
+              id="header-sound-btn"
+              class="btn btn-secondary btn-sm hidden"
+              aria-pressed="true"
+            >
+              Sound On
+            </button>
+            <button type="button" id="header-primary-btn" class="btn btn-primary btn-sm">
+              Start Quiz
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div id="confetti-layer" class="confetti-layer no-print" aria-hidden="true"></div>
+
+      <!-- WELCOME VIEW -->
+      <main id="welcome-view" class="welcome-main">
+        <div class="hero-banner">
+          <svg class="hero-banner-img" viewBox="0 0 800 160" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration of diverse students talking respectfully across a campus">
+            <rect width="800" height="160" fill="var(--hero-bg)"/>
+            <path d="M0 130 Q200 100 400 125 T800 118 V160 H0Z" fill="var(--hero-ground)"/>
+            <g fill="var(--accent-cobalt)"><circle cx="130" cy="78" r="15"/><rect x="113" y="96" width="34" height="48" rx="14"/></g>
+            <g fill="var(--accent-terracotta)"><circle cx="215" cy="84" r="14"/><rect x="199" y="101" width="32" height="43" rx="13"/></g>
+            <g fill="var(--accent-teal)"><circle cx="590" cy="80" r="15"/><rect x="573" y="98" width="34" height="46" rx="14"/></g>
+            <g fill="var(--accent-ochre)"><circle cx="675" cy="86" r="14"/><rect x="659" y="103" width="32" height="41" rx="13"/></g>
+            <g fill="none" stroke="var(--ink-muted)" stroke-width="2.5" stroke-linecap="round"><path d="M268 64h70a10 10 0 0 1 10 10v16a10 10 0 0 1-10 10h-40l-14 12v-12h-16a10 10 0 0 1-10-10V74a10 10 0 0 1 10-10z" transform="translate(40 -30)"/><path d="M452 54h66a10 10 0 0 1 10 10v14a10 10 0 0 1-10 10h-12v11l-13-11h-41a10 10 0 0 1-10-10V64a10 10 0 0 1 10-10z" transform="translate(-10 -6)"/></g>
+          </svg>
+        </div>
+
+        <section class="welcome-content">
+          <div class="welcome-grid">
+            <div class="welcome-copy">
+              <p class="kicker kicker-terracotta">
+                10 Campus &amp; Workplace Case Studies
+              </p>
+              <h1 class="display-title welcome-title">
+                Small choices shape safer, fairer spaces for everyone.
+              </h1>
+              <p class="body-lead">
+                Walk through ten everyday situations covering respectful language,
+                personal boundaries, online safety, shared housing, and work
+                dignity—with instant feedback and a takeaway summary at the end.
+              </p>
+
+              <div class="welcome-cta-row">
+                <button type="button" id="welcome-start-btn" class="btn btn-primary">
+                  <span>Begin 10-Case Quiz</span>
+                  <span aria-hidden="true">→</span>
+                </button>
+                <button
+                  type="button"
+                  id="welcome-sound-btn"
+                  class="btn btn-secondary"
+                  aria-pressed="true"
+                >
+                  <span id="welcome-sound-label">Sound On</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="welcome-pillars" aria-label="Four ethical themes">
+              <div class="pillar-item">
+                <span class="pillar-marker marker-foundations" aria-hidden="true"></span>
+                <div>
+                  <p class="pillar-title">Foundations &amp; Scope</p>
+                  <p class="pillar-sub">
+                    Systematic unwanted acts, protected traits, and verbal harm
+                  </p>
+                </div>
+              </div>
+              <div class="pillar-item">
+                <span class="pillar-marker marker-sexual" aria-hidden="true"></span>
+                <div>
+                  <p class="pillar-title">Boundaries &amp; Power</p>
+                  <p class="pillar-sub">
+                    Single-incident threshold, quid pro quo, and unwanted contact
+                  </p>
+                </div>
+              </div>
+              <div class="pillar-item">
+                <span class="pillar-marker marker-digital" aria-hidden="true"></span>
+                <div>
+                  <p class="pillar-title">Digital Safety</p>
+                  <p class="pillar-sub">
+                    Unsolicited explicit media, anonymity, and photo blackmail
+                  </p>
+                </div>
+              </div>
+              <div class="pillar-item">
+                <span class="pillar-marker marker-spaces" aria-hidden="true"></span>
+                <div>
+                  <p class="pillar-title">Home &amp; Workplace</p>
+                  <p class="pillar-sub">
+                    Cohabitation abuse, reporting barriers, and customer harassment
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- QUIZ VIEW -->
+      <main id="quiz-view" class="quiz-main hidden">
+        <div
+          id="quiz-progressbar"
+          class="progress-track"
+          role="progressbar"
+          aria-valuenow="5"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-label="Quiz completion progress"
+        >
+          <div id="quiz-progress-fill" class="progress-fill"></div>
+        </div>
+
+        <section class="case-sheet" aria-labelledby="case-title">
+          <div class="case-top-row">
+            <div class="case-thumb-wrap">
+              <img
+                id="case-img"
+                src=""
+                alt=""
+                class="case-thumb"
+              />
+            </div>
+            <div class="case-text-col">
+              <p id="case-meta" class="case-meta"></p>
+              <h1 id="case-title" class="case-title"></h1>
+              <p id="case-scenario" class="case-scenario"></p>
+            </div>
+          </div>
+          <div class="case-question-row">
+            <p id="case-question" class="case-question"></p>
+            <span id="case-keys-hint" class="keys-hint">Keys 1–4</span>
+          </div>
+        </section>
+
+        <section id="options-grid" class="options-grid" aria-label="Response choices"></section>
+
+        <div class="feedback-slot">
+          <div id="quiz-idle-hint" class="idle-hint">
+            <span>Choose the response that best upholds fairness, safety, and respect.</span>
+            <span id="idle-counter" class="mono-counter">1 / 10</span>
+          </div>
+
+          <section
+            id="feedback-strip"
+            class="feedback-strip hidden"
+            aria-live="polite"
+          >
+            <div class="feedback-col-reason">
+              <p id="feedback-heading" class="feedback-heading"></p>
+              <p id="feedback-note" class="feedback-note"></p>
+            </div>
+            <div class="feedback-col-principle">
+              <p id="feedback-principle" class="feedback-principle"></p>
+              <p id="feedback-takeaway" class="feedback-takeaway"></p>
+            </div>
+            <div class="feedback-col-action">
+              <button type="button" id="next-case-btn" class="btn btn-primary">
+                Next Case →
+              </button>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <!-- SUMMARY VIEW -->
+      <main id="summary-view" class="summary-main hidden">
+        <section class="summary-header-section print-card">
+          <div class="summary-hero-row">
+            <div>
+              <p id="summary-kicker" class="kicker kicker-teal">
+                All 10 Cases Completed
+              </p>
+              <h1 id="summary-headline" class="display-title summary-title">
+                You worked through 10 real dilemmas in Gender Ethics.
+              </h1>
+              <p class="body-lead">
+                Each scenario connects everyday decisions in classrooms, shared
+                housing, online chats, and internships to practical dignity and
+                fairness.
+              </p>
+            </div>
+            <div class="summary-score-block">
+              <p class="score-label">Aligned Choices</p>
+              <p id="summary-score" class="score-value">0 <span>/ 10</span></p>
+            </div>
+          </div>
+
+          <div id="summary-pillars" class="summary-pillars-grid"></div>
+        </section>
+
+        <section
+          class="reflection-sheet print-card"
+          aria-labelledby="reflection-card-heading"
+        >
+          <div class="reflection-header">
+            <div>
+              <p class="kicker kicker-terracotta">Personal Takeaway Sheet</p>
+              <h2 id="reflection-card-heading" class="section-title">
+                What stays with you from these cases?
+              </h2>
+            </div>
+            <div class="reflection-actions no-print">
+              <button type="button" id="copy-summary-btn" class="btn btn-secondary btn-sm">
+                Copy Summary
+              </button>
+              <button type="button" id="print-summary-btn" class="btn btn-primary btn-sm">
+                Print Sheet
+              </button>
+            </div>
+          </div>
+
+          <div class="pledge-block">
+            <p class="field-label">1. Choose one everyday commitment to prioritize</p>
+            <div id="pledge-list" class="pledge-list"></div>
+          </div>
+
+          <div class="note-block">
+            <div class="note-label-row">
+              <label for="reflection-textarea" class="field-label">
+                2. Your own reflection or discussion note
+              </label>
+              <span class="saved-hint">Saved locally</span>
+            </div>
+            <textarea
+              id="reflection-textarea"
+              rows="3"
+              placeholder="Example: I hadn’t realized that unlike other harassment, sexual harassment does not need to be repetitive—even one incident counts..."
+            ></textarea>
+          </div>
+
+          <div class="takeaways-block">
+            <h3 class="takeaways-heading">10 Case Takeaways</h3>
+            <ol id="takeaways-list" class="takeaways-list"></ol>
+          </div>
+        </section>
+
+        <section class="review-section no-print" aria-labelledby="case-review-heading">
+          <div>
+            <h2 id="case-review-heading" class="section-title">Revisit Any Case</h2>
+            <p class="review-sub">
+              Expand a scenario to compare your answer with the underlying ethical principle.
+            </p>
+          </div>
+
+          <div id="case-review-list" class="case-review-list"></div>
+
+          <div class="summary-footer-actions">
+            <button type="button" id="return-home-btn" class="btn btn-secondary">
+              Return Home
+            </button>
+            <button type="button" id="replay-quiz-btn" class="btn btn-primary">
+              Replay 10-Case Quiz
+            </button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>const ETHICAL_PILLARS = {
+  foundations: {
+    id: 'foundations',
+    shortTitle: 'Foundations & Scope',
+    subtitle: 'Systematic unwanted acts, protected traits, and verbal harm',
+    barColor: '#1d4ed8',
+    tagColor: '#1d4ed8',
+    dotClass: 'marker-foundations',
+  },
+  sexual: {
+    id: 'sexual',
+    shortTitle: 'Boundaries & Power',
+    subtitle: 'Single-incident threshold, quid pro quo, and unwanted contact',
+    barColor: '#c2410c',
+    tagColor: '#c2410c',
+    dotClass: 'marker-sexual',
+  },
+  digital: {
+    id: 'digital',
+    shortTitle: 'Digital Safety',
+    subtitle: 'Unsolicited explicit media, anonymity, and photo blackmail',
+    barColor: '#b45309',
+    tagColor: '#b45309',
+    dotClass: 'marker-digital',
+  },
+  spaces: {
+    id: 'spaces',
+    shortTitle: 'Home & Workplace',
+    subtitle: 'Cohabitation abuse, reporting barriers, and customer harassment',
+    barColor: '#0f766e',
+    tagColor: '#0f766e',
+    dotClass: 'marker-spaces',
+  },
+};
+
+const CASE_STUDIES = [
+  {
+    id: 'case-systematic-harassment',
+    caseNumber: 1,
+    aspectLabel: 'Defining Harassment',
+    title: 'The Repeated Corridor Demands',
+    pillar: 'foundations',
+    setting: 'Campus Academic Block · First-Year Corridor',
+    scenario:
+      'For three weeks, two seniors wait outside a lab to block Arjun’s path, demand his lab notes, and make veiled threats to "make his semester miserable" out of personal rivalry, leaving him anxious to attend class.',
+    question:
+      'Does this meet the definition of harassment if it stems from personal rivalry rather than group prejudice?',
+    options: [
+      {
+        id: 'A',
+        label: 'Only if the hostility targets a protected group identity such as race or gender.',
+        isBest: false,
+        feedbackNote:
+          'Prejudice is one motive, yet harassment also includes personal malice, coercion, or gaining pleasure from making someone fearful.',
+      },
+      {
+        id: 'B',
+        label: 'Only after Arjun files a formal notice and the behavior continues past a warning.',
+        isBest: false,
+        feedbackNote:
+          'Continued unwanted demands and threats already constitute harassment without waiting for a formal warning step.',
+      },
+      {
+        id: 'C',
+        label: 'Yes—systematic, continued unwanted actions and threats meant to cause fear count regardless of motive.',
+        isBest: true,
+        feedbackNote:
+          'Harassment encompasses systematic or continued unwanted actions—including threats, demands, personal malice, or making someone fearful or anxious.',
+      },
+      {
+        id: 'D',
+        label: 'No—unless physical assault or property damage accompanies the hallway demands.',
+        isBest: false,
+        feedbackNote:
+          'Harassment does not require physical violence; sustained threats, demands, and intimidation suffice.',
+      },
+    ],
+    principleTitle: 'Systematic Unwanted Actions & Intimidation',
+    whyItMatters:
+      'Harassment covers systematic or continued unwanted acts—threats, demands, personal malice, or gaining sadistic pleasure from making someone fearful or anxious—not only bias-based slurs.',
+    campusTakeaway:
+      'Repeated threats, demands, or intimidation intended to create fear constitute harassment regardless of motive.',
+  },
+  {
+    id: 'case-protected-characteristics',
+    caseNumber: 2,
+    aspectLabel: 'Protected Characteristics',
+    title: 'The Client-Facing Team Selection',
+    pillar: 'foundations',
+    setting: 'University Placement Cell · Student Project',
+    scenario:
+      'A student coordinator quietly moves a pregnant teammate and a student with a visible hand tremor off the client presentation roster to back-office slides, arguing that external sponsors expect a "polished physical image."',
+    question: 'How should an ethics panel evaluate this reassignment?',
+    options: [
+      {
+        id: 'A',
+        label: 'Both pregnancy and disability are protected characteristics, so excluding them over physical image is discriminatory harassment.',
+        isBest: true,
+        feedbackNote:
+          'Harassment can target traits including pregnancy, disability, physicality, age, gender, sexual orientation, race, colour, or genetic information.',
+      },
+      {
+        id: 'B',
+        label: 'Removing the student with a tremor crosses the line, whereas pregnancy role changes are standard workload care.',
+        isBest: false,
+        feedbackNote:
+          'Pregnancy is explicitly recognized as a ground of workplace harassment; unsolicited exclusion removes agency.',
+      },
+      {
+        id: 'C',
+        label: 'It avoids harassment because the coordinator reassigned roles quietly without demeaning remarks.',
+        isBest: false,
+        feedbackNote:
+          'Exclusion driven by bias around physicality, disability, or pregnancy still harms equality even without loud insults.',
+      },
+      {
+        id: 'D',
+        label: 'External client expectations justify appearance-based selection when project grades remain equal.',
+        isBest: false,
+        feedbackNote:
+          'Deferring to perceived client bias perpetuates systemic workplace discrimination.',
+      },
+    ],
+    principleTitle: 'Characteristics Behind Harassment',
+    whyItMatters:
+      'Harassment can be rooted in age, physicality, sexual orientation, gender, position of authority, race, colour, genetic information, disability, and pregnancy.',
+    campusTakeaway:
+      'Pregnancy, disability, and physicality are protected grounds; never sideline teammates over appearance.',
+  },
+  {
+    id: 'case-verbal-jokes',
+    caseNumber: 3,
+    aspectLabel: 'Verbal Harassment',
+    title: 'The "Just Banter" Team Nickname',
+    pillar: 'foundations',
+    setting: 'College Sports Club · Practice Field',
+    scenario:
+      'Teammates call a quiet fresher by an offensive nickname mocking his body weight and crack jokes whenever he misses a drill. He forces a smile so he will not look overly sensitive, though he starts skipping practices.',
+    question: 'Why does the "harmless banter" defense fail under ethics guidelines?',
+    options: [
+      {
+        id: 'A',
+        label: 'It fails only once he formally tells the teammates in writing that the nickname offends him.',
+        isBest: false,
+        feedbackNote:
+          'Targets often smile or stay silent out of social pressure; demeaning nicknames remain unacceptable even without formal protest.',
+      },
+      {
+        id: 'B',
+        label: 'Peer nicknames count as harassment only when coaches or senior authorities participate.',
+        isBest: false,
+        feedbackNote:
+          'Peer-to-peer verbal abuse is just as much harassment as mistreatment from someone in authority.',
+      },
+      {
+        id: 'C',
+        label: 'Offensive jokes cross the line only when paired with physical hazing or threats.',
+        isBest: false,
+        feedbackNote:
+          'Verbal behaviors alone—without any physical threat—can constitute harassment.',
+      },
+      {
+        id: 'D',
+        label: 'Offensive jokes, demeaning remarks, and offensive nicknames are recognized forms of verbal harassment regardless of a forced smile.',
+        isBest: true,
+        feedbackNote:
+          'Harassment includes verbal behaviors like offensive jokes, demeaning remarks, name-calling, and offensive nicknames.',
+      },
+    ],
+    principleTitle: 'Verbal & Behavioral Spectrum of Harassment',
+    whyItMatters:
+      'Harassment spans verbal and physical acts alike: offensive jokes, demeaning remarks, name-calling, offensive nicknames, bullying, threats, and intimidation.',
+    campusTakeaway:
+      'Offensive jokes and demeaning nicknames are verbal harassment, even when peers laugh awkwardly to fit in.',
+  },
+  {
+    id: 'case-single-incident-sexual',
+    caseNumber: 4,
+    aspectLabel: 'Single-Incident Rule',
+    title: 'One Evening on the Campus Shuttle',
+    pillar: 'sexual',
+    setting: 'Evening Campus Bus · Public Transit',
+    scenario:
+      'On a crowded shuttle bus, a rider makes an explicit sexual comment and presses against Aisha intentionally. When she shares what happened, a friend suggests it is "awful misconduct, though probably not harassment since it only happened once."',
+    question: 'What is inaccurate about her friend’s reasoning?',
+    options: [
+      {
+        id: 'A',
+        label: 'Harassment on public transport is classified separately from campus or workplace rules.',
+        isBest: false,
+        feedbackNote:
+          'Public venues like transport, schools, and workplaces are explicitly common settings for sexual harassment.',
+      },
+      {
+        id: 'B',
+        label: 'Unlike other harassment, sexual harassment does not need to be continuous, prolonged, or repetitive—one incident counts.',
+        isBest: true,
+        feedbackNote:
+          'Sexual harassment is distinct in that even a single unwanted sexual remark or contact constitutes sexual harassment.',
+      },
+      {
+        id: 'C',
+        label: 'A single incident qualifies only if the perpetrator holds a position of authority over the victim.',
+        isBest: false,
+        feedbackNote:
+          'Authority defines quid pro quo harassment, whereas general sexual harassment applies to anyone, including strangers.',
+      },
+      {
+        id: 'D',
+        label: 'The friend is right—harassment always requires repeated conduct, while one-time acts are a separate issue.',
+        isBest: false,
+        feedbackNote:
+          'Repetition applies to general harassment definitions, whereas sexual harassment explicitly needs no repetition.',
+      },
+    ],
+    principleTitle: 'No Repetition Threshold for Sexual Harassment',
+    whyItMatters:
+      'Unlike other harassment, sexual harassment does not need to be continuous, prolonged, or repetitive. It occurs across transport, schools, workplaces, and homes.',
+    campusTakeaway:
+      'Sexual harassment requires no pattern of repetition—even a single unwanted sexual act is a violation.',
+  },
+  {
+    id: 'case-quid-pro-quo',
+    caseNumber: 5,
+    aspectLabel: 'Quid Pro Quo Power',
+    title: 'The Delayed Stipend Conversation',
+    pillar: 'sexual',
+    setting: 'Research Internship · Lab Coordinator Office',
+    scenario:
+      'A lab coordinator who signs off on undergraduate stipends tells an intern, "Come back late alone this Saturday and be much friendlier with me, or your monthly stipend approval might get held up."',
+    question: 'Which classification best fits this interaction, and why?',
+    options: [
+      {
+        id: 'A',
+        label: 'Too ambiguous to classify, because "be friendlier" does not explicitly name a sexual favor.',
+        isBest: false,
+        feedbackNote:
+          'Implied pressure linking private late-night compliance to financial approval is classic coercive power abuse.',
+      },
+      {
+        id: 'B',
+        label: 'General sexual harassment only, because no extra promotion or bonus was promised.',
+        isBest: false,
+        feedbackNote:
+          'Quid pro quo covers both offering benefits AND preventing a detriment (such as holding up a stipend).',
+      },
+      {
+        id: 'C',
+        label: 'Quid pro quo harassment, because someone in authority is tying prevention of a detriment to personal/sexual compliance.',
+        isBest: true,
+        feedbackNote:
+          'Quid pro quo harassment occurs when a person in power requests sexual favors in exchange for benefits or preventing a detriment.',
+      },
+      {
+        id: 'D',
+        label: 'A standard administrative dispute, since student interns are not permanent full-time employees.',
+        isBest: false,
+        feedbackNote:
+          'Authority abuse over interns, students, or temporary staff is still quid pro quo harassment.',
+      },
+    ],
+    principleTitle: 'Quid Pro Quo Harassment & Authority Abuse',
+    whyItMatters:
+      'Quid pro quo harassment occurs when someone in power or authority leverages benefits—or threatens detriments like delayed pay or poor grades—in exchange for sexual favors.',
+    campusTakeaway:
+      'Tying grades, stipends, or preventing harm to unwanted personal compliance is quid pro quo harassment.',
+  },
+  {
+    id: 'case-general-sexual-harassment',
+    caseNumber: 6,
+    aspectLabel: 'General Sexual Harassment',
+    title: 'Backstage "Crew Bonding"',
+    pillar: 'sexual',
+    setting: 'College Cultural Fest · Rehearsal Hall',
+    scenario:
+      'A senior fest organizer frequently pulls junior volunteers into lingering hugs, rubs their shoulders unasked, and sends late-night suggestive texts, explaining, "I treat everyone warmly—it is just how fest crews bond."',
+    question: 'Why does "treating everyone that way" not excuse the behavior?',
+    options: [
+      {
+        id: 'A',
+        label: 'Unwarranted touching, hugging, sexual jokes, and inappropriate texts that make people uncomfortable constitute general sexual harassment.',
+        isBest: true,
+        feedbackNote:
+          'General sexual harassment covers any unwanted, unwarranted act—including rubbing, touching, hugging, sexual jokes, or inappropriate texts.',
+      },
+      {
+        id: 'B',
+        label: 'It is poor personal etiquette rather than sexual harassment if the organizer shows no gender preference.',
+        isBest: false,
+        feedbackNote:
+          'Unwanted sexualized contact or texts remain harassment regardless of whether multiple people are targeted.',
+      },
+      {
+        id: 'C',
+        label: 'Suggestive late-night texts cross the line, whereas hugs in busy public halls depend solely on intent.',
+        isBest: false,
+        feedbackNote:
+          'Unwarranted physical contact such as rubbing or hugging is explicitly part of general sexual harassment.',
+      },
+      {
+        id: 'D',
+        label: 'Physical gestures count as harassment only when paired with threats to cut someone from the team.',
+        isBest: false,
+        feedbackNote:
+          'Threats define quid pro quo harassment; general sexual harassment requires no career threat.',
+      },
+    ],
+    principleTitle: 'General Sexual Harassment & Personal Boundaries',
+    whyItMatters:
+      'General sexual harassment means any unwanted, unwarranted act causing discomfort—including offensive sexual jokes, physical aggression, unwarranted rubbing/touching/hugging, or inappropriate texts and images.',
+    campusTakeaway:
+      'Unwanted hugging, touching, sexual jokes, and inappropriate texts are all forms of general sexual harassment.',
+  },
+  {
+    id: 'case-cyberbullying',
+    caseNumber: 7,
+    aspectLabel: 'Cyberbullying & Anonymity',
+    title: 'Private DMs From a Burner Account',
+    pillar: 'digital',
+    setting: 'Social Media & Freshers Chat Network',
+    scenario:
+      'An anonymous burner account begins sending a student unsolicited explicit photos and insulting messages late at night in private DMs. Nothing is posted publicly on the main college page, yet her sleep and mental health suffer.',
+    question: 'Which statement accurately describes this online situation?',
+    options: [
+      {
+        id: 'A',
+        label: 'Private one-on-one messages fall outside cyberbullying unless shared in a public group feed.',
+        isBest: false,
+        feedbackNote:
+          'Private DMs containing unsolicited explicit images or unwarranted texts are direct forms of cyberbullying.',
+      },
+      {
+        id: 'B',
+        label: 'Non-sexual insults count as cyberbullying, while explicit photos are treated separately from bullying.',
+        isBest: false,
+        feedbackNote:
+          'Cyberbullying explicitly encompasses both sexual and non-sexual online harassment.',
+      },
+      {
+        id: 'C',
+        label: 'Because laws against cyberbullying are recent and burner accounts hide identity, little can be documented.',
+        isBest: false,
+        feedbackNote:
+          'While anonymity makes tracking harder, cyberbullying laws and campus cyber cells rely on preserved screenshots and timestamps.',
+      },
+      {
+        id: 'D',
+        label: 'Sending unsolicited explicit images or unwarranted texts that affect mental health is cyberbullying, even privately from anonymous accounts.',
+        isBest: true,
+        feedbackNote:
+          'Cyberbullying can be sexual or non-sexual, often using social media anonymity to send unsolicited images or texts that harm mental health.',
+      },
+    ],
+    principleTitle: 'Cyberbullying Across Social Media',
+    whyItMatters:
+      'Cyberbullying includes both sexual and non-sexual online acts—such as unsolicited explicit pictures or unwarranted texts—that damage mental health while perpetrators hide behind social media anonymity.',
+    campusTakeaway:
+      'Unsolicited explicit images and harassing DMs are cyberbullying—document screenshots, block, and report.',
+  },
+  {
+    id: 'case-image-blackmail',
+    caseNumber: 8,
+    aspectLabel: 'Coercion & Photo Blackmail',
+    title: 'Threats Over an Altered Photo',
+    pillar: 'digital',
+    setting: 'College Hostel · Student Council Election',
+    scenario:
+      'A rival threatens to circulate an edited, compromising photo of a candidate across hostel groups unless she drops out of the student election. A friend advises stepping out quietly "to avoid drama since no money was demanded."',
+    question: 'What is the flaw in advising her to step down quietly?',
+    options: [
+      {
+        id: 'A',
+        label: 'Stepping down avoids public gossip, and blackmail legally applies only to financial extortion.',
+        isBest: false,
+        feedbackNote:
+          'Coercing someone with offensive or pornographic photos to force an action—not only money—is harassment via blackmail and intimidation.',
+      },
+      {
+        id: 'B',
+        label: 'Blackmailing with offensive or explicit photos to coerce someone is severe harassment; preserving evidence and reporting stops coercion.',
+        isBest: true,
+        feedbackNote:
+          'Blackmailing with offensive or pornographic photos, threats, and intimidation is a serious form of harassment requiring evidence and safe reporting.',
+      },
+      {
+        id: 'C',
+        label: 'Because the image is digitally altered rather than real, it is purely a defamation issue.',
+        isBest: false,
+        feedbackNote:
+          'Manipulated or offensive photos used to intimidate and blackmail remain severe digital harassment.',
+      },
+      {
+        id: 'D',
+        label: 'Negotiating privately one-on-one with the sender is safer than saving screenshots.',
+        isBest: false,
+        feedbackNote:
+          'Preserving evidence and involving trusted authorities protects the target far better than quiet concessions.',
+      },
+    ],
+    principleTitle: 'Blackmail, Threats & Survivor Support',
+    whyItMatters:
+      'Harassment explicitly includes blackmailing with offensive or pornographic photos, threats, and intimidation. Preserving proof and seeking institutional support prevents coercion from escalating.',
+    campusTakeaway:
+      'Coercion using offensive or edited photos is severe harassment—preserve evidence and report safely.',
+  },
+  {
+    id: 'case-domestic-cohabitation',
+    caseNumber: 9,
+    aspectLabel: 'Domestic & Cohabitation Abuse',
+    title: 'Behind Closed Doors in a Shared Flat',
+    pillar: 'spaces',
+    setting: 'Off-Campus Shared Apartment · Housemates',
+    scenario:
+      'A student sharing an off-campus apartment with an older non-romantic housemate faces constant verbal humiliation, financial control, and sudden shoving. Yet she defends the housemate to friends and refuses to report anything.',
+    question:
+      'Why is this still recognized as domestic violence despite there being no romantic relationship?',
+    options: [
+      {
+        id: 'A',
+        label: 'It is actually a civil landlord dispute, because domestic violence laws apply strictly to married or romantic partners.',
+        isBest: false,
+        feedbackNote:
+          'Domestic violence is commonly assumed to involve spouses, yet perpetrators can be housemates or anyone in a cohabitation setting.',
+      },
+      {
+        id: 'B',
+        label: 'Only the shoving qualifies as abuse, whereas verbal humiliation in shared housing is normal roommate conflict.',
+        isBest: false,
+        feedbackNote: 'Domestic violence includes both physical and mental abuse.',
+      },
+      {
+        id: 'C',
+        label: 'Domestic violence can occur among housemates in cohabitation, involves physical and mental abuse, and victims often hesitate due to trauma bonding, fear, or dependence.',
+        isBest: true,
+        feedbackNote:
+          'Anyone in a cohabitation setting—including housemates—can perpetrate physical or mental domestic abuse, often hidden by trauma bonding, fear, or dependence.',
+      },
+      {
+        id: 'D',
+        label: 'If an adult resident defends the housemate voluntarily, friends should assume the situation is harmless.',
+        isBest: false,
+        feedbackNote:
+          'Emotional bonding or fear (trauma bonding, fear, or dependence) often stops victims from filing reports even in dangerous situations.',
+      },
+    ],
+    principleTitle: 'Cohabitation Abuse & Barriers to Reporting',
+    whyItMatters:
+      'Domestic violence can happen between spouses, housemates, or anyone sharing a living space. It includes mental and physical abuse, and victims may be unwilling to report due to trauma bonding, fear, or dependence.',
+    campusTakeaway:
+      'Domestic abuse extends to housemates in shared housing, includes mental harm, and often carries complex reporting barriers.',
+  },
+  {
+    id: 'case-workplace-customer',
+    caseNumber: 10,
+    aspectLabel: 'Workplace & Customer Harassment',
+    title: 'The Part-Time Desk & the Regular Client',
+    pillar: 'spaces',
+    setting: 'Summer Service Internship · Front Desk',
+    scenario:
+      'At a summer internship, a regular client repeatedly mocks an intern’s nationality and age whenever she helps him. Her manager says, "Workplace harassment rules only cover staff—we cannot police paying customers."',
+    question: 'What does the manager misunderstand about workplace harassment?',
+    options: [
+      {
+        id: 'A',
+        label: 'Workplace harassment can be sexual or non-sexual, can be committed by customers as well as staff, and includes nationality or age bias.',
+        isBest: true,
+        feedbackNote:
+          'Anyone in a professional setting—supervisor, co-worker, or customer—can commit sexual or non-sexual harassment over nationality, age, gender, race, or personal grudge.',
+      },
+      {
+        id: 'B',
+        label: 'Customer conduct falls under workplace harassment only when the remarks are explicitly sexual.',
+        isBest: false,
+        feedbackNote:
+          'Workplace harassment includes both sexual and non-sexual discrimination.',
+      },
+      {
+        id: 'C',
+        label: 'The manager is partly right—organizations are responsible for supervisors and co-workers, not external clients.',
+        isBest: false,
+        feedbackNote:
+          'Professional settings must protect workers from harassment committed by supervisors, co-workers, and customers alike.',
+      },
+      {
+        id: 'D',
+        label: 'Temporary summer interns must raise customer bias with their university rather than their employer.',
+        isBest: false,
+        feedbackNote:
+          'Everyone working in a professional setting—including interns—is entitled to a harassment-free workplace.',
+      },
+    ],
+    principleTitle: 'Workplace Harassment Beyond Staff Boundaries',
+    whyItMatters:
+      'Workplace harassment can be sexual or non-sexual and victimizes anyone in a professional setting. Perpetrators may be supervisors, co-workers, or customers motivated by gender, race, nationality, age, appearance, or personal grudge.',
+    campusTakeaway:
+      'Workplace protections cover sexual and non-sexual harassment from supervisors, co-workers, and customers alike.',
+  },
+];
+
+const REFLECTION_PLEDGES = [
+  'Interrupt "just joking" nicknames, offensive jokes, and demeaning remarks early in peer spaces.',
+  'Recognize that sexual harassment needs no repetition—treat single incidents and boundary crossings seriously.',
+  'Never forward unsolicited explicit images or ignore cyberbullying and photo-based blackmail threats.',
+  'Support friends in shared housing or internships with non-judgmental listening and safe reporting resources.',
+];
+
+
+const PILLAR_ART = {
+  foundations: '<path d="M30 40h70a10 10 0 0 1 10 10v26a10 10 0 0 1-10 10H70l-20 16V86H40a10 10 0 0 1-10-10V50a10 10 0 0 1 10-10z" fill="#fff" fill-opacity=".92"/><path d="M92 74h58a10 10 0 0 1 10 10v22a10 10 0 0 1-10 10h-8v14l-18-14H92a10 10 0 0 1-10-10V84a10 10 0 0 1 10-10z" fill="#fff" fill-opacity=".6"/>',
+  sexual: '<path d="M95 24l48 16v34c0 30-20 50-48 62-28-12-48-32-48-62V40z" fill="#fff" fill-opacity=".92"/><path d="M73 78l16 16 30-32" fill="none" stroke="COLOR" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>',
+  digital: '<rect x="66" y="22" width="58" height="104" rx="12" fill="#fff" fill-opacity=".92"/><rect x="74" y="36" width="42" height="64" rx="4" fill="COLOR" fill-opacity=".25"/><circle cx="95" cy="112" r="5" fill="COLOR"/><path d="M132 44a30 30 0 0 1 0 38M142 34a46 46 0 0 1 0 58" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".8"/>',
+  spaces: '<path d="M40 82L95 34l55 48v48H40z" fill="#fff" fill-opacity=".92"/><rect x="82" y="94" width="26" height="36" rx="4" fill="COLOR"/><circle cx="148" cy="38" r="12" fill="#fff" fill-opacity=".6"/>',
+};
+function pillarArt(p) {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 142"><rect width="190" height="142" fill="${p.barColor}"/><circle cx="170" cy="125" r="46" fill="#fff" fill-opacity=".08"/>${PILLAR_ART[p.id].replace(/COLOR/g, p.barColor)}</svg>`;
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+}
+
+function buildPlay() {
+  return CASE_STUDIES.map((c) => {
+    const opts = c.options.map((o) => ({ ...o }));
+    for (let i = opts.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [opts[i], opts[j]] = [opts[j], opts[i]];
+    }
+    opts.forEach((o, i) => (o.id = 'ABCD'[i]));
+    return { ...c, options: opts };
+  });
+}
+let playCases = buildPlay();
+
+const STORAGE_KEY = 'gender_ethics_html_reflection_v1';
+
+let state = {
+  view: 'WELCOME',
+  currentIndex: 0,
+  selectedOptionId: null,
+  records: [],
+  soundEnabled: true,
+  selectedPledge: REFLECTION_PLEDGES[0],
+  reflectionNote: '',
+  expandedCaseId: null,
+};
+
+try {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) {
+    const parsed = JSON.parse(saved);
+    if (parsed.pledge) state.selectedPledge = parsed.pledge;
+    if (typeof parsed.note === 'string') state.reflectionNote = parsed.note;
+  }
+} catch (_) {}
+
+function saveReflection() {
+  try {
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({ pledge: state.selectedPledge, note: state.reflectionNote })
+    );
+  } catch (_) {}
+}
+
+let audioCtx = null;
+function playChime(type) {
+  if (!state.soundEnabled) return;
+  try {
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    if (!Ctx) return;
+    if (!audioCtx) audioCtx = new Ctx();
+    if (audioCtx.state === 'suspended') audioCtx.resume().catch(() => {});
+
+    const now = audioCtx.currentTime;
+    const notes =
+      type === 'thoughtful'
+        ? [523.25, 659.25]
+        : type === 'complete'
+          ? [523.25, 659.25, 783.99]
+          : [440, 392];
+
+    notes.forEach((freq, idx) => {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, now + idx * 0.09);
+      gain.gain.setValueAtTime(0.001, now + idx * 0.09);
+      gain.gain.exponentialRampToValueAtTime(0.06, now + idx * 0.09 + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.09 + 0.35);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now + idx * 0.09);
+      osc.stop(now + idx * 0.09 + 0.36);
+    });
+  } catch (_) {}
+}
+
+const els = {
+  app: document.getElementById('app'),
+  brandHomeBtn: document.getElementById('brand-home-btn'),
+  headerStatus: document.getElementById('header-status'),
+  headerSoundBtn: document.getElementById('header-sound-btn'),
+  headerPrimaryBtn: document.getElementById('header-primary-btn'),
+  welcomeView: document.getElementById('welcome-view'),
+  welcomeStartBtn: document.getElementById('welcome-start-btn'),
+  welcomeSoundBtn: document.getElementById('welcome-sound-btn'),
+  welcomeSoundLabel: document.getElementById('welcome-sound-label'),
+  quizView: document.getElementById('quiz-view'),
+  progressTrack: document.getElementById('quiz-progressbar'),
+  progressFill: document.getElementById('quiz-progress-fill'),
+  caseImg: document.getElementById('case-img'),
+  caseMeta: document.getElementById('case-meta'),
+  caseTitle: document.getElementById('case-title'),
+  caseScenario: document.getElementById('case-scenario'),
+  caseQuestion: document.getElementById('case-question'),
+  caseKeysHint: document.getElementById('case-keys-hint'),
+  optionsGrid: document.getElementById('options-grid'),
+  idleHint: document.getElementById('quiz-idle-hint'),
+  idleCounter: document.getElementById('idle-counter'),
+  feedbackStrip: document.getElementById('feedback-strip'),
+  feedbackHeading: document.getElementById('feedback-heading'),
+  feedbackNote: document.getElementById('feedback-note'),
+  feedbackPrinciple: document.getElementById('feedback-principle'),
+  feedbackTakeaway: document.getElementById('feedback-takeaway'),
+  nextCaseBtn: document.getElementById('next-case-btn'),
+  summaryView: document.getElementById('summary-view'),
+  confettiLayer: document.getElementById('confetti-layer'),
+  summaryKicker: document.getElementById('summary-kicker'),
+  summaryHeadline: document.getElementById('summary-headline'),
+  summaryScore: document.getElementById('summary-score'),
+  summaryPillars: document.getElementById('summary-pillars'),
+  pledgeList: document.getElementById('pledge-list'),
+  reflectionTextarea: document.getElementById('reflection-textarea'),
+  takeawaysList: document.getElementById('takeaways-list'),
+  caseReviewList: document.getElementById('case-review-list'),
+  copySummaryBtn: document.getElementById('copy-summary-btn'),
+  printSummaryBtn: document.getElementById('print-summary-btn'),
+  returnHomeBtn: document.getElementById('return-home-btn'),
+  replayQuizBtn: document.getElementById('replay-quiz-btn'),
+};
+
+function updateSoundLabels() {
+  const label = state.soundEnabled ? 'Sound On' : 'Sound Off';
+  els.headerSoundBtn.textContent = label;
+  els.headerSoundBtn.setAttribute('aria-pressed', String(state.soundEnabled));
+  els.welcomeSoundLabel.textContent = label;
+  els.welcomeSoundBtn.setAttribute('aria-pressed', String(state.soundEnabled));
+}
+
+function toggleSound() {
+  state.soundEnabled = !state.soundEnabled;
+  updateSoundLabels();
+}
+
+function startQuiz() {
+  state.view = 'QUIZ';
+  state.currentIndex = 0;
+  state.selectedOptionId = null;
+  state.records = [];
+  state.expandedCaseId = null;
+  playCases = buildPlay();
+  render();
+}
+
+function goHome() {
+  state.view = 'WELCOME';
+  render();
+}
+
+function triggerConfetti() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const pieces = [
+    { left: '6%', tx: '-18px', ty: '150px', rot: '140deg', delay: '0s', color: '#C2410C', dot: false },
+    { left: '12%', tx: '22px', ty: '190px', rot: '-120deg', delay: '0.08s', color: '#1D4ED8', dot: true },
+    { left: '18%', tx: '-10px', ty: '165px', rot: '200deg', delay: '0.04s', color: '#D97706', dot: false },
+    { left: '24%', tx: '16px', ty: '210px', rot: '-90deg', delay: '0.14s', color: '#0F766E', dot: false },
+    { left: '30%', tx: '-24px', ty: '175px', rot: '170deg', delay: '0.06s', color: '#E11D48', dot: true },
+    { left: '37%', tx: '14px', ty: '195px', rot: '-150deg', delay: '0.12s', color: '#1D4ED8', dot: false },
+    { left: '44%', tx: '-15px', ty: '155px', rot: '110deg', delay: '0.02s', color: '#D97706', dot: true },
+    { left: '50%', tx: '26px', ty: '205px', rot: '-180deg', delay: '0.16s', color: '#0F766E', dot: false },
+    { left: '57%', tx: '-12px', ty: '185px', rot: '130deg', delay: '0.05s', color: '#C2410C', dot: false },
+    { left: '64%', tx: '19px', ty: '170px', rot: '-110deg', delay: '0.1s', color: '#E11D48', dot: true },
+    { left: '71%', tx: '-20px', ty: '215px', rot: '190deg', delay: '0.03s', color: '#1D4ED8', dot: false },
+    { left: '78%', tx: '12px', ty: '160px', rot: '-140deg', delay: '0.13s', color: '#D97706', dot: false },
+    { left: '85%', tx: '-16px', ty: '195px', rot: '160deg', delay: '0.07s', color: '#0F766E', dot: true },
+    { left: '92%', tx: '24px', ty: '180px', rot: '-170deg', delay: '0.15s', color: '#C2410C', dot: false },
+  ];
+
+  els.confettiLayer.innerHTML = '';
+  pieces.forEach((p) => {
+    const span = document.createElement('span');
+    span.className = 'confetti-piece';
+    span.style.left = p.left;
+    span.style.backgroundColor = p.color;
+    span.style.width = p.dot ? '8px' : '10px';
+    span.style.height = p.dot ? '8px' : '6px';
+    span.style.borderRadius = p.dot ? '999px' : '2px';
+    span.style.animationDelay = p.delay;
+    span.style.setProperty('--tx', p.tx);
+    span.style.setProperty('--ty', p.ty);
+    span.style.setProperty('--rot', p.rot);
+    els.confettiLayer.appendChild(span);
+  });
+
+  window.setTimeout(() => {
+    els.confettiLayer.innerHTML = '';
+  }, 2400);
+}
+
+function selectOption(optionId) {
+  if (state.selectedOptionId !== null) return;
+  const currentCase = playCases[state.currentIndex];
+  const chosen = currentCase.options.find((o) => o.id === optionId);
+  if (!chosen) return;
+
+  state.selectedOptionId = optionId;
+  playChime(chosen.isBest ? 'thoughtful' : 'reconsider');
+  state.records.push({
+    caseStudy: currentCase,
+    selectedOptionId: optionId,
+    isOptimal: chosen.isBest,
+  });
+  renderQuiz();
+}
+
+function nextCase() {
+  if (state.currentIndex + 1 < playCases.length) {
+    state.currentIndex += 1;
+    state.selectedOptionId = null;
+    render();
+  } else {
+    playChime('complete');
+    const missed = state.records.find((r) => !r.isOptimal);
+    state.expandedCaseId = missed ? missed.caseStudy.id : null;
+    state.view = 'SUMMARY';
+    render();
+    triggerConfetti();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+function renderQuiz() {
+  const currentCase = playCases[state.currentIndex];
+  const pillar = ETHICAL_PILLARS[currentCase.pillar];
+  const isAnswered = state.selectedOptionId !== null;
+  const selectedOption =
+    currentCase.options.find((o) => o.id === state.selectedOptionId) || null;
+  const bestOption = currentCase.options.find((o) => o.isBest);
+  const isLast = state.currentIndex === playCases.length - 1;
+
+  const progressFraction =
+    (state.currentIndex + (isAnswered ? 1 : 0.45)) / playCases.length;
+  const progressPercent = Math.min(100, Math.round(progressFraction * 100));
+
+  els.headerStatus.innerHTML = `<span class="mono">${state.currentIndex + 1} of ${playCases.length}</span> / <span class="aspect">${currentCase.aspectLabel}</span>`;
+  els.progressTrack.setAttribute('aria-valuenow', String(progressPercent));
+  els.progressFill.style.transform = `scaleX(${progressFraction})`;
+  els.progressFill.style.backgroundColor = pillar.barColor;
+
+  els.caseImg.src = pillarArt(pillar);
+  els.caseImg.alt = `${currentCase.title} — ${currentCase.aspectLabel} illustration`;
+  els.caseMeta.innerHTML = `<span class="aspect-tag" style="color:${pillar.tagColor}">${currentCase.aspectLabel}</span> · ${currentCase.setting}`;
+  els.caseTitle.textContent = currentCase.title;
+  els.caseScenario.textContent = currentCase.scenario;
+  els.caseQuestion.textContent = currentCase.question;
+  els.caseKeysHint.classList.toggle('hidden', isAnswered);
+
+  els.optionsGrid.innerHTML = '';
+  currentCase.options.forEach((opt) => {
+    const isSelected = state.selectedOptionId === opt.id;
+    const showBest = isAnswered && opt.isBest;
+    const showReconsider = isAnswered && isSelected && !opt.isBest;
+    const dim = isAnswered && !isSelected && !opt.isBest;
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.disabled = isAnswered;
+    btn.className = 'option-card';
+    if (showBest) btn.classList.add('is-best');
+    if (showReconsider) btn.classList.add('is-reconsider');
+    if (dim) btn.classList.add('is-dimmed');
+
+    const statusHtml = showBest
+      ? `<p class="option-status best">${isSelected ? '✓ Your Choice · Accurate' : '✓ Best Perspective'}</p>`
+      : showReconsider
+        ? `<p class="option-status reconsider">→ Your Choice · Closer Look</p>`
+        : '';
+
+    btn.innerHTML = `
+      <span class="option-badge badge-${opt.id}">${opt.id}</span>
+      <div>
+        ${statusHtml}
+        <p class="option-label">${opt.label}</p>
+      </div>
+    `;
+    btn.addEventListener('click', () => selectOption(opt.id));
+    els.optionsGrid.appendChild(btn);
+  });
+
+  if (isAnswered && selectedOption) {
+    els.idleHint.classList.add('hidden');
+    els.feedbackStrip.classList.remove('hidden');
+    els.feedbackHeading.className = `feedback-heading ${selectedOption.isBest ? 'best' : 'reconsider'}`;
+    els.feedbackHeading.textContent = selectedOption.isBest
+      ? 'Well reasoned'
+      : `Why Option ${bestOption.id} works best`;
+    els.feedbackNote.textContent = selectedOption.isBest
+      ? selectedOption.feedbackNote
+      : `Not quite: ${selectedOption.feedbackNote} Best answer: ${bestOption.feedbackNote}`;
+    els.feedbackPrinciple.textContent = currentCase.principleTitle;
+    els.feedbackTakeaway.textContent = currentCase.campusTakeaway;
+    els.nextCaseBtn.textContent = isLast ? 'See Takeaway →' : 'Next Case →';
+    if (!els.nextCaseBtn.dataset.f) { els.nextCaseBtn.dataset.f = '1'; }
+    requestAnimationFrame(() => els.nextCaseBtn.focus({ preventScroll: false }));
+  } else {
+    els.idleHint.classList.remove('hidden');
+    els.feedbackStrip.classList.add('hidden');
+    els.idleCounter.textContent = `${state.currentIndex + 1} / ${playCases.length}`;
+  }
+}
+
+function renderSummary() {
+  const total = state.records.length;
+  const optimal = state.records.filter((r) => r.isOptimal).length;
+
+  els.summaryKicker.textContent = `All ${total} Cases Completed`;
+  els.summaryHeadline.textContent = `You worked through ${total} real dilemmas in Gender Ethics.`;
+  els.summaryScore.innerHTML = `${optimal} <span>/ ${total}</span>`;
+  const ratio = total ? optimal / total : 0;
+  const msg = ratio >= 0.9 ? 'Strong grasp of the principles. Share them with others.' : ratio >= 0.6 ? 'Solid foundation. Revisit the cases below to close the gaps.' : 'Plenty to build on. Open the cases below and compare your reasoning.';
+  let note = document.getElementById('score-note');
+  if (!note) { note = document.createElement('p'); note.id = 'score-note'; note.className = 'score-note'; els.summaryScore.parentNode.appendChild(note); }
+  note.textContent = msg;
+
+  els.summaryPillars.innerHTML = '';
+  Object.values(ETHICAL_PILLARS).forEach((pillar) => {
+    const matching = state.records.filter((r) => r.caseStudy.pillar === pillar.id);
+    if (!matching.length) return;
+    const aligned = matching.filter((r) => r.isOptimal).length;
+    const div = document.createElement('div');
+    div.innerHTML = `
+      <div class="summary-pillar-head">
+        <span class="pillar-marker ${pillar.dotClass}" aria-hidden="true"></span>
+        <p class="summary-pillar-name">${pillar.shortTitle}</p>
+      </div>
+      <p class="summary-pillar-count">${aligned} of ${matching.length} aligned</p>
+      <p class="summary-pillar-sub">${pillar.subtitle}</p>
+    `;
+    els.summaryPillars.appendChild(div);
+  });
+
+  els.pledgeList.innerHTML = '';
+  REFLECTION_PLEDGES.forEach((pledge) => {
+    const active = state.selectedPledge === pledge;
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = `pledge-btn${active ? ' is-active' : ''}`;
+    btn.setAttribute('aria-pressed', String(active));
+    btn.innerHTML = `
+      <span class="pledge-check">${active ? '✓' : ''}</span>
+      <span>${pledge}</span>
+    `;
+    btn.addEventListener('click', () => {
+      state.selectedPledge = pledge;
+      saveReflection();
+      renderSummary();
+    });
+    els.pledgeList.appendChild(btn);
+  });
+
+  els.reflectionTextarea.value = state.reflectionNote;
+
+  els.takeawaysList.innerHTML = '';
+  state.records.forEach((rec, i) => {
+    const li = document.createElement('li');
+    li.className = 'takeaway-item';
+    li.innerHTML = `
+      <span class="takeaway-num">${String(i + 1).padStart(2, '0')}.</span>
+      <span><strong>${rec.caseStudy.title}:</strong> ${rec.caseStudy.campusTakeaway}</span>
+    `;
+    els.takeawaysList.appendChild(li);
+  });
+
+  els.caseReviewList.innerHTML = '';
+  state.records.forEach((rec) => {
+    const isOpen = state.expandedCaseId === rec.caseStudy.id;
+    const chosen = rec.caseStudy.options.find((o) => o.id === rec.selectedOptionId);
+    const best = rec.caseStudy.options.find((o) => o.isBest);
+
+    const item = document.createElement('div');
+    item.className = 'review-item';
+
+    const toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'review-toggle';
+    toggle.setAttribute('aria-expanded', String(isOpen));
+    toggle.innerHTML = `
+      <div>
+        <p class="review-title">${rec.caseStudy.title}</p>
+        <p class="review-meta">${rec.caseStudy.aspectLabel} · ${rec.isOptimal ? 'Aligned' : 'Reviewed'}</p>
+      </div>
+      <span aria-hidden="true">${isOpen ? '▲' : '▼'}</span>
+    `;
+    toggle.addEventListener('click', () => {
+      state.expandedCaseId = isOpen ? null : rec.caseStudy.id;
+      renderSummary();
+    });
+    item.appendChild(toggle);
+
+    if (isOpen) {
+      const body = document.createElement('div');
+      body.className = 'review-body';
+      body.innerHTML = `
+        <p>${rec.caseStudy.scenario}</p>
+        ${chosen ? `<p><strong>Your choice:</strong> ${chosen.label}</p>` : ''}
+        ${!rec.isOptimal ? `<p class="review-best"><strong>Best perspective:</strong> ${best.label}</p>` : ''}
+        <p><strong>${rec.caseStudy.principleTitle}:</strong> ${rec.caseStudy.whyItMatters}</p>
+      `;
+      item.appendChild(body);
+    }
+
+    els.caseReviewList.appendChild(item);
+  });
+}
+
+function render() {
+  window.scrollTo({ top: 0 });
+  const locked = state.view === 'WELCOME' || state.view === 'QUIZ';
+  els.app.classList.toggle('is-locked', locked);
+
+  els.welcomeView.classList.toggle('hidden', state.view !== 'WELCOME');
+  els.quizView.classList.toggle('hidden', state.view !== 'QUIZ');
+  els.summaryView.classList.toggle('hidden', state.view !== 'SUMMARY');
+
+  els.headerSoundBtn.classList.toggle('hidden', state.view !== 'QUIZ');
+
+  if (state.view === 'WELCOME') {
+    els.headerStatus.textContent = 'Ethics & Values · 10 Case Studies';
+    els.headerPrimaryBtn.textContent = 'Start Quiz';
+    els.headerPrimaryBtn.className = 'btn btn-primary btn-sm';
+  } else {
+    els.headerPrimaryBtn.textContent = 'Home';
+    els.headerPrimaryBtn.className = 'btn btn-secondary btn-sm';
+    if (state.view === 'SUMMARY') {
+      els.headerStatus.textContent = 'Ethics & Values · Reflection Summary';
+    }
+  }
+
+  updateSoundLabels();
+
+  if (state.view === 'QUIZ') renderQuiz();
+  if (state.view === 'SUMMARY') renderSummary();
+}
+
+els.brandHomeBtn.addEventListener('click', goHome);
+els.headerPrimaryBtn.addEventListener('click', () => {
+  if (state.view === 'WELCOME') startQuiz();
+  else goHome();
+});
+els.headerSoundBtn.addEventListener('click', toggleSound);
+els.welcomeStartBtn.addEventListener('click', startQuiz);
+els.welcomeSoundBtn.addEventListener('click', toggleSound);
+els.nextCaseBtn.addEventListener('click', nextCase);
+els.returnHomeBtn.addEventListener('click', goHome);
+els.replayQuizBtn.addEventListener('click', startQuiz);
+
+els.reflectionTextarea.addEventListener('input', (e) => {
+  state.reflectionNote = e.target.value;
+  saveReflection();
+});
+
+els.copySummaryBtn.addEventListener('click', async () => {
+  const total = state.records.length;
+  const optimal = state.records.filter((r) => r.isOptimal).length;
+  const lines = [
+    'Gender Ethics — Reflection & Takeaway Card',
+    `Cases Explored: ${total} | Thoughtful Approaches: ${optimal}/${total}`,
+    '',
+    'Selected Campus Pledge:',
+    `- ${state.selectedPledge}`,
+    '',
+    'Personal Reflection:',
+    state.reflectionNote.trim() || '(No personal note added)',
+    '',
+    'Key Takeaways:',
+    ...state.records.map(
+      (r, i) => `${i + 1}. ${r.caseStudy.title}: ${r.caseStudy.campusTakeaway}`
+    ),
+  ];
+
+  const text = lines.join('\n');
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch (_) {
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+    } catch (__) {}
+  }
+  els.copySummaryBtn.textContent = 'Copied ✓';
+  window.setTimeout(() => {
+    els.copySummaryBtn.textContent = 'Copy Summary';
+  }, 2400);
+});
+
+els.printSummaryBtn.addEventListener('click', () => window.print());
+
+window.addEventListener('keydown', (e) => {
+  if (state.view !== 'QUIZ') return;
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+  if (state.selectedOptionId === null) {
+    const map = { '1': 'A', '2': 'B', '3': 'C', '4': 'D', a: 'A', b: 'B', c: 'C', d: 'D' };
+    const mapped = map[e.key.toLowerCase()];
+    if (mapped) {
+      e.preventDefault();
+      selectOption(mapped);
+    }
+  } else if (e.key === 'Enter') {
+    e.preventDefault();
+    nextCase();
+  }
+});
+
+render();
+</script>
+  </body>
+</html>
